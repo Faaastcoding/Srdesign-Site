@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SR Design — Studio créatif</title>
+<meta name="description" content="Studio de design créatif. Identités visuelles, sites web, landing pages et flyers pensés pour convertir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06070e;
+  --bg-2:#0a0c16;
+  --panel:rgba(255,255,255,.02);
+  --ink:#eef1fb;
+  --muted:#98a1c4;
+  --faint:#5b6488;
+  --cyan:#4ee2ff;
+  --mag:#ff4d97;
+  --violet:#8b5cf6;
+  --line:rgba(150,170,255,.10);
+  --line-2:rgba(150,170,255,.16);
+  --disp:"Syne","Trebuchet MS",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,sans-serif;
+  --mono:"Space Mono",ui-monospace,monospace;
+  --maxw:1240px;
+  --grad:linear-gradient(100deg,var(--cyan),var(--violet) 55%,var(--mag));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:rgba(255,77,151,.3);color:#fff}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+
+/* ambient canvas */
+#aurora{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.9}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%,transparent 55%,rgba(0,0,0,.55))}
+main,header,footer{position:relative;z-index:2}
+
+/* cursor */
+.cur,.cur-d{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;border-radius:50%;
+  translate:-50% -50%;mix-blend-mode:screen;transition:width .25s,height .25s,opacity .25s,background .25s}
+.cur{width:34px;height:34px;border:1px solid rgba(120,200,255,.6);backdrop-filter:invert(.05)}
+.cur-d{width:6px;height:6px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.cur.big{width:70px;height:70px;border-color:rgba(255,77,151,.7);background:rgba(255,77,151,.06)}
+@media (pointer:coarse){.cur,.cur-d{display:none}}
+
+/* nav */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,backdrop-filter .4s;
+  border-bottom:1px solid transparent}
+header.scrolled{background:rgba(6,7,14,.72);backdrop-filter:blur(14px) saturate(1.2);border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+.brand{font-family:var(--disp);font-weight:800;font-size:22px;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 14px var(--mag)}
+.brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--muted)}
+.nav-links a{position:relative;transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--grad);transition:width .3s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.btn{font-family:var(--body);font-weight:600;font-size:15px;cursor:pointer;border:none;background:none;color:inherit}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:100px;
+  color:#06070e;background:var(--grad);background-size:160% 160%;font-weight:700;
+  box-shadow:0 6px 30px rgba(255,77,151,.28);transition:transform .3s,box-shadow .3s,background-position .6s}
+.btn-primary:hover{background-position:100% 0;box-shadow:0 10px 40px rgba(78,226,255,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:100px;
+  border:1px solid var(--line-2);color:var(--ink);transition:border-color .3s,background .3s}
+.btn-ghost:hover{border-color:rgba(78,226,255,.6);background:rgba(78,226,255,.05)}
+.nav .btn-primary{padding:11px 20px;font-size:14px}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* generic reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);
+  display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--cyan);opacity:.7}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 90px;position:relative}
+.hero h1{font-size:clamp(44px,8.2vw,104px);margin:22px 0 0}
+.hero h1 .gr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{max-width:560px;color:var(--muted);font-size:clamp(17px,2.2vw,20px);margin-top:28px}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:38px}
+.hero-foot{display:flex;gap:40px;flex-wrap:wrap;margin-top:70px;padding-top:34px;border-top:1px solid var(--line)}
+.hero-foot .s{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.4vw,38px)}
+.hero-foot .l{font-size:13.5px;color:var(--faint);margin-top:2px}
+.scrollcue{position:absolute;left:50%;bottom:30px;translate:-50% 0;font-family:var(--mono);font-size:11px;letter-spacing:.25em;
+  color:var(--faint);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scrollcue .bar{width:1px;height:46px;background:linear-gradient(var(--cyan),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+
+/* word reveal */
+.rise{display:inline-block;overflow:hidden;vertical-align:top}
+.rise>span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.hero.ready .rise>span{transform:none}
+.hero .rise:nth-child(2)>span{transition-delay:.09s}
+.hero .rise:nth-child(3)>span{transition-delay:.18s}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;
+  background:rgba(255,255,255,.012)}
+.mq-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:mq 32s linear infinite}
+.mq-track span{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,30px);color:transparent;
+  -webkit-text-stroke:1px rgba(150,170,255,.4);padding:0 34px;display:inline-flex;align-items:center;gap:34px}
+.mq-track span::after{content:"◆";-webkit-text-stroke:0;color:var(--mag);font-size:12px}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.mq-track{animation:none}.scrollcue .bar{animation:none}}
+
+/* section shell */
+section{padding:clamp(80px,12vw,150px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:64px}
+.sec-head h2{font-size:clamp(32px,5.2vw,62px)}
+.sec-head p{max-width:400px;color:var(--muted)}
+
+/* services */
+.svc{border-top:1px solid var(--line)}
+.svc-row{display:grid;grid-template-columns:90px 1.1fr 1.4fr auto;gap:30px;align-items:center;
+  padding:38px 0;border-bottom:1px solid var(--line);transition:padding .4s}
+.svc-row .num{font-family:var(--mono);color:var(--faint);font-size:15px}
+.svc-row h3{font-size:clamp(24px,3.4vw,40px);font-weight:700;transition:color .3s,transform .4s}
+.svc-row p{color:var(--muted);font-size:15.5px}
+.svc-row .go{width:52px;height:52px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;
+  transition:background .3s,border-color .3s,transform .3s;color:var(--muted)}
+.svc-row:hover{padding-left:14px}
+.svc-row:hover h3{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.svc-row:hover .go{background:var(--grad);color:#06070e;border-color:transparent;transform:rotate(-45deg) scale(1.05)}
+@media(max-width:760px){.svc-row{grid-template-columns:52px 1fr;gap:6px 18px}.svc-row p{grid-column:2}.svc-row .go{display:none}}
+
+/* work */
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.pj{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);cursor:pointer;
+  aspect-ratio:4/3;display:flex;align-items:flex-end;isolation:isolate}
+.pj.wide{grid-column:span 7}.pj.narrow{grid-column:span 5}
+.pj .cover{position:absolute;inset:0;z-index:-1;transition:transform 1s cubic-bezier(.16,1,.3,1),filter .5s}
+.pj:hover .cover{transform:scale(1.08)}
+.pj .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(4,5,10,.85))}
+.pj .meta{padding:26px;position:relative;z-index:2;width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.pj .cat{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);opacity:.9}
+.pj .tt{font-family:var(--disp);font-weight:800;font-size:clamp(24px,3vw,34px);margin-top:6px}
+.pj .arrow{width:44px;height:44px;border-radius:50%;background:rgba(6,7,14,.5);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;flex:none;
+  transform:translateY(8px);opacity:0;transition:opacity .4s,transform .4s}
+.pj:hover .arrow{opacity:1;transform:none}
+@media(max-width:760px){.pj.wide,.pj.narrow{grid-column:span 12}}
+
+/* process */
+.proc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px;background:var(--line);
+  border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.step{background:var(--bg);padding:40px 32px;transition:background .4s}
+.step:hover{background:var(--bg-2)}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--mag)}
+.step h3{font-size:22px;font-weight:700;margin:18px 0 12px}
+.step p{color:var(--muted);font-size:15px}
+
+/* quote */
+.quote{text-align:center;max-width:920px;margin:0 auto}
+.quote blockquote{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.6vw,50px);line-height:1.18;margin:0;letter-spacing:-.02em}
+.quote .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.quote .by{margin-top:34px;color:var(--muted);font-size:15px;font-family:var(--mono);letter-spacing:.08em}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.tier{border:1px solid var(--line);border-radius:20px;padding:38px 32px;background:var(--panel);
+  display:flex;flex-direction:column;transition:transform .4s,border-color .4s,box-shadow .4s}
+.tier:hover{transform:translateY(-8px);border-color:var(--line-2)}
+.tier.feat{border-color:transparent;background:
+  linear-gradient(var(--bg-2),var(--bg-2)) padding-box,
+  var(--grad) border-box;box-shadow:0 20px 60px rgba(139,92,246,.25)}
+.tier .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+.tier.feat .tag{color:var(--mag)}
+.tier h3{font-size:26px;font-weight:700;margin:14px 0 6px}
+.tier .price{font-family:var(--disp);font-weight:800;font-size:40px;margin:14px 0 4px}
+.tier .price small{font-size:15px;font-weight:400;color:var(--faint);font-family:var(--body)}
+.tier ul{list-style:none;padding:0;margin:24px 0 30px;display:grid;gap:13px;font-size:15px;color:var(--muted)}
+.tier li{display:flex;gap:12px;align-items:flex-start}
+.tier li svg{flex:none;margin-top:3px;color:var(--cyan)}
+.tier .btn-tier{margin-top:auto;text-align:center;padding:14px;border-radius:100px;border:1px solid var(--line-2);
+  font-weight:600;transition:background .3s,border-color .3s,color .3s}
+.tier.feat .btn-tier{background:var(--grad);color:#06070e;border-color:transparent;font-weight:700}
+.tier:not(.feat) .btn-tier:hover{border-color:var(--cyan);background:rgba(78,226,255,.06)}
+
+/* cta */
+.cta-final{text-align:center;position:relative}
+.cta-final .halo{position:absolute;left:50%;top:50%;translate:-50% -50%;width:min(760px,90%);height:340px;z-index:0;
+  background:radial-gradient(closest-side,rgba(139,92,246,.35),transparent 70%);filter:blur(40px)}
+.cta-final h2{font-size:clamp(38px,8vw,96px);position:relative;z-index:1}
+.cta-final h2 .gr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta-final p{color:var(--muted);max-width:520px;margin:24px auto 0;position:relative;z-index:1}
+.cta-final .hero-cta{justify-content:center;position:relative;z-index:1}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,255,255,.012)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.foot-grid h4{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin:0 0 18px;font-weight:400}
+.foot-links{display:grid;gap:12px}
+.foot-links a{color:var(--muted);transition:color .25s,padding-left .25s}
+.foot-links a:hover{color:var(--ink);padding-left:6px}
+.foot-brand .tag{font-family:var(--disp);font-size:clamp(24px,3vw,34px);font-weight:700;max-width:340px;line-height:1.15}
+.foot-brand .tag em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:26px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:13.5px;font-family:var(--mono);letter-spacing:.04em}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<canvas id="aurora"></canvas>
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="cur"></div><div class="cur-d"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="dot"></span>SR&nbsp;<em>Design</em></a>
+    <nav class="nav-links">
+      <a href="#studio">Studio</a>
+      <a href="#services">Services</a>
+      <a href="#work">Réalisations</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn-primary" data-mag href="#contact">Démarrer un projet</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="studio">
+    <div class="wrap">
+      <span class="eyebrow rv">Studio de design créatif · Indépendant</span>
+      <h1>
+        <span class="rise"><span>Le design qui</span></span><br>
+        <span class="rise"><span>transforme l'attention</span></span><br>
+        <span class="rise"><span>en <span class="gr">clients.</span></span></span>
+      </h1>
+      <p class="lead rv">SR Design conçoit des identités, des sites et des landing pages qui ne se contentent pas d'être beaux&nbsp;: ils convertissent. Chaque projet est traité comme s'il valait des millions — parce que pour vous, il les vaut.</p>
+      <div class="hero-cta rv">
+        <a class="btn-primary" data-mag href="#contact">Démarrer un projet →</a>
+        <a class="btn-ghost" data-mag href="#work">Voir les réalisations</a>
+      </div>
+      <div class="hero-foot rv">
+        <div><div class="s"><span data-count="150">0</span>+</div><div class="l">Projets livrés</div></div>
+        <div><div class="s"><span data-count="8">0</span> ans</div><div class="l">D'expérience</div></div>
+        <div><div class="s"><span data-count="98">0</span>%</div><div class="l">Clients satisfaits</div></div>
+        <div><div class="s">48h</div><div class="l">Délai moyen</div></div>
+      </div>
+    </div>
+    <div class="scrollcue"><span>Scroll</span><span class="bar"></span></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <span>Branding</span><span>Web Design</span><span>Landing Pages</span><span>Identité Visuelle</span><span>Flyers</span><span>Direction Artistique</span>
+      <span>Branding</span><span>Web Design</span><span>Landing Pages</span><span>Identité Visuelle</span><span>Flyers</span><span>Direction Artistique</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow rv">Ce que je fais</span>
+          <h2 class="rv" style="margin-top:18px">Des services taillés<br>pour votre croissance.</h2>
+        </div>
+        <p class="rv">Une expertise complète, du premier trait de crayon à la mise en ligne. Vous parlez à une seule personne, responsable de A à Z.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-row rv"><div class="num">01</div><h3>Identité visuelle</h3><p>Logo, charte, couleurs et typographies. Une marque cohérente, distinctive et mémorable.</p><div class="go">→</div></div>
+        <div class="svc-row rv"><div class="num">02</div><h3>Sites &amp; Landing Pages</h3><p>Des sites rapides, responsives et pensés pour un objectif clair&nbsp;: convertir vos visiteurs en clients.</p><div class="go">→</div></div>
+        <div class="svc-row rv"><div class="num">03</div><h3>Flyers &amp; Print</h3><p>Des visuels percutants, imprimables, qui attirent l'œil et donnent envie de vous contacter.</p><div class="go">→</div></div>
+        <div class="svc-row rv"><div class="num">04</div><h3>Direction artistique</h3><p>Une vision cohérente sur tous vos supports, en ligne comme sur le papier.</p><div class="go">→</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow rv">Réalisations sélectionnées</span>
+          <h2 class="rv" style="margin-top:18px">Un aperçu du travail.</h2>
+        </div>
+        <p class="rv">Quelques projets récents. Chacun part d'une page blanche et finit par une marque dont le client est fier.</p>
+      </div>
+      <div class="work-grid">
+        <a class="pj wide rv"><div class="cover" data-cover="1"></div><div class="meta"><div><div class="cat">Identité de marque</div><div class="tt">Aurora</div></div><div class="arrow">↗</div></div></a>
+        <a class="pj narrow rv"><div class="cover" data-cover="2"></div><div class="meta"><div><div class="cat">Landing page SaaS</div><div class="tt">Volt</div></div><div class="arrow">↗</div></div></a>
+        <a class="pj narrow rv"><div class="cover" data-cover="3"></div><div class="meta"><div><div class="cat">Site e-commerce</div><div class="tt">Nexus</div></div><div class="arrow">↗</div></div></a>
+        <a class="pj wide rv"><div class="cover" data-cover="4"></div><div class="meta"><div><div class="cat">Flyer &amp; affiche</div><div class="tt">Botanica</div></div><div class="arrow">↗</div></div></a>
+        <a class="pj wide rv"><div class="cover" data-cover="5"></div><div class="meta"><div><div class="cat">Refonte web</div><div class="tt">Momentum</div></div><div class="arrow">↗</div></div></a>
+        <a class="pj narrow rv"><div class="cover" data-cover="6"></div><div class="meta"><div><div class="cat">Direction artistique</div><div class="tt">Halo</div></div><div class="arrow">↗</div></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow rv">La méthode</span>
+          <h2 class="rv" style="margin-top:18px">Simple, cadré, sans surprise.</h2>
+        </div>
+        <p class="rv">Un processus clair du début à la fin. Vous savez toujours où en est votre projet.</p>
+      </div>
+      <div class="proc">
+        <div class="step rv"><div class="n">01</div><h3>Découverte</h3><p>On comprend votre marque, vos objectifs et vos clients avant de dessiner quoi que ce soit.</p></div>
+        <div class="step rv"><div class="n">02</div><h3>Création</h3><p>J'explore plusieurs pistes, puis j'affine la direction retenue jusqu'au moindre détail.</p></div>
+        <div class="step rv"><div class="n">03</div><h3>Livraison</h3><p>Vous recevez tous les fichiers finaux, propres, organisés et prêts à l'emploi.</p></div>
+        <div class="step rv"><div class="n">04</div><h3>Suivi</h3><p>Révisions incluses jusqu'à votre entière satisfaction. On ne s'arrête pas à «&nbsp;presque&nbsp;».</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section>
+    <div class="wrap quote">
+      <blockquote class="rv">«&nbsp;En trois semaines, SR&nbsp;Design nous a donné une image <span class="hl">dont on est fiers</span> — et nos ventes ont suivi.&nbsp;»</blockquote>
+      <div class="by rv">— Client SR Design · exemple à personnaliser</div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="tarifs">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow rv">Tarifs</span>
+          <h2 class="rv" style="margin-top:18px">Un budget clair,<br>dès le départ.</h2>
+        </div>
+        <p class="rv">Des formules transparentes. Pas de coûts cachés, pas de mauvaise surprise. Un devis précis avant de commencer.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier rv">
+          <span class="tag">Essentiel</span>
+          <h3>Le visuel</h3>
+          <div class="price">90€<small> / dès</small></div>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>1 flyer ou affiche</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Fichiers imprimables HD</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>2 révisions incluses</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Livraison en 48h</li>
+          </ul>
+          <a class="btn-tier" data-mag href="#contact">Choisir</a>
+        </div>
+        <div class="tier feat rv">
+          <span class="tag">Le plus choisi</span>
+          <h3>Signature</h3>
+          <div class="price">690€<small> / dès</small></div>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Identité visuelle complète</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Site ou landing page</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Version mobile optimisée</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Révisions illimitées</li>
+          </ul>
+          <a class="btn-tier" data-mag href="#contact">Choisir</a>
+        </div>
+        <div class="tier rv">
+          <span class="tag">Sur-mesure</span>
+          <h3>Projet complet</h3>
+          <div class="price">Sur devis</div>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Stratégie de marque</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Site multi-pages</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Supports print &amp; digital</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Accompagnement dédié</li>
+          </ul>
+          <a class="btn-tier" data-mag href="#contact">En parler</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-final" id="contact">
+    <div class="halo"></div>
+    <div class="wrap">
+      <span class="eyebrow rv" style="justify-content:center;display:flex">Votre projet, mon expertise</span>
+      <h2 class="rv" style="margin-top:26px">Donnons vie<br>à <span class="gr">votre idée.</span></h2>
+      <p class="rv">Parlez-moi de votre projet. Réponse sous 24h, devis gratuit, et zéro engagement.</p>
+      <div class="hero-cta rv" style="margin-top:40px">
+        <a class="btn-primary" data-mag href="mailto:Srdesign.contactpro@gmail.com">Écrire à SR Design →</a>
+        <a class="btn-ghost" data-mag href="https://instagram.com/SRdesign_Studio" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand" style="margin-bottom:20px"><span class="dot"></span>SR&nbsp;<em>Design</em></div>
+        <div class="tag">Votre projet,<br><em>mon expertise.</em></div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="foot-links">
+          <a href="#studio">Studio</a><a href="#services">Services</a><a href="#work">Réalisations</a><a href="#tarifs">Tarifs</a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="foot-links">
+          <a href="mailto:Srdesign.contactpro@gmail.com">Srdesign.contactpro@gmail.com</a>
+          <a href="https://instagram.com/SRdesign_Studio" target="_blank" rel="noopener">Instagram — @SRdesign_Studio</a>
+          <a href="#">Snapchat — SRdesignStudio</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SR Design — Créatif · Moderne · Professionnel</span>
+      <span>Conçu avec exigence.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* nav scrolled */
+  var hdr=document.getElementById('hdr');
+  addEventListener('scroll',function(){hdr.classList.toggle('scrolled',scrollY>30);},{passive:true});
+
+  /* hero word reveal */
+  var hero=document.querySelector('.hero');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){hero.classList.add('ready');});});
+
+  /* reveal on scroll */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+  /* counters */
+  function run(el){var t=+el.dataset.count,s=performance.now(),d=1500;
+    function f(n){var p=Math.min(1,(n-s)/d);el.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+  var ioc=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);ioc.unobserve(e.target);}});},{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){ioc.observe(el);});
+
+  /* project covers (generated gradient art) */
+  var covers={
+    1:'radial-gradient(120% 120% at 20% 15%,#4ee2ff,transparent 45%),radial-gradient(120% 120% at 85% 80%,#8b5cf6,transparent 50%),linear-gradient(135deg,#0a1230,#160a2e)',
+    2:'radial-gradient(100% 120% at 80% 10%,#ff4d97,transparent 45%),radial-gradient(120% 120% at 10% 90%,#ff9d4d,transparent 50%),linear-gradient(135deg,#2a0a1c,#160a10)',
+    3:'radial-gradient(120% 120% at 15% 20%,#2effc7,transparent 45%),radial-gradient(120% 120% at 90% 85%,#4e8bff,transparent 50%),linear-gradient(135deg,#031a1a,#04122a)',
+    4:'radial-gradient(120% 120% at 70% 20%,#a5ff4d,transparent 42%),radial-gradient(120% 120% at 20% 90%,#4ee2ff,transparent 50%),linear-gradient(135deg,#0a1f10,#08171f)',
+    5:'radial-gradient(120% 120% at 25% 15%,#8b5cf6,transparent 45%),radial-gradient(120% 120% at 85% 85%,#ff4d97,transparent 48%),linear-gradient(135deg,#150a2e,#22091d)',
+    6:'radial-gradient(120% 120% at 80% 15%,#ffd24d,transparent 42%),radial-gradient(120% 120% at 15% 90%,#ff4d97,transparent 50%),linear-gradient(135deg,#231a06,#1c0a16)'
+  };
+  document.querySelectorAll('[data-cover]').forEach(function(el){el.style.background=covers[el.dataset.cover];el.style.backgroundSize='cover';});
+
+  /* custom cursor + magnetic */
+  var cur=document.querySelector('.cur'),curd=document.querySelector('.cur-d');
+  if(matchMedia('(pointer:fine)').matches){
+    var mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+    addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;curd.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';});
+    (function loop(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,[data-mag],.pj,.svc-row,.tier').forEach(function(el){
+      el.addEventListener('mouseenter',function(){cur.classList.add('big');});
+      el.addEventListener('mouseleave',function(){cur.classList.remove('big');});
+    });
+    document.querySelectorAll('[data-mag]').forEach(function(el){
+      el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();
+        el.style.transform='translate('+((e.clientX-r.left-r.width/2)*.28)+'px,'+((e.clientY-r.top-r.height/2)*.4)+'px)';});
+      el.addEventListener('mouseleave',function(){el.style.transform='';});
+    });
+  } else { cur.style.display='none';curd.style.display='none'; }
+
+  /* aurora canvas */
+  var cv=document.getElementById('aurora'),ctx=cv.getContext('2d'),W,H,dpr=Math.min(1.6,devicePixelRatio||1);
+  function size(){W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
+  size();addEventListener('resize',size);
+  var cols=[[78,226,255],[139,92,246],[255,77,151]];
+  var blobs=[];for(var i=0;i<5;i++){blobs.push({x:Math.random(),y:Math.random(),
+    r:.3+Math.random()*.35,c:cols[i%3],px:Math.random()*6.28,py:Math.random()*6.28,sx:.00013+Math.random()*.0002,sy:.00013+Math.random()*.0002});}
+  function draw(t){ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
+    blobs.forEach(function(b){var x=(b.x+Math.sin(t*b.sx+b.px)*.18)*W,y=(b.y+Math.cos(t*b.sy+b.py)*.18)*H,r=b.r*Math.max(W,H);
+      var g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+',0.16)');
+      g.addColorStop(1,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+',0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();});
+    if(!reduce)requestAnimationFrame(draw);}
+  if(reduce)draw(0);else requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
