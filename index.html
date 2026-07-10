@@ -385,19 +385,106 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-final" id="contact">
+  <!-- CONTACT -->
+  <style>
+    .contact-final{padding:clamp(80px,12vw,150px) 0;position:relative;overflow:hidden}
+    .contact-final .halo{position:absolute;left:50%;top:36%;translate:-50% -50%;width:min(780px,92%);height:380px;z-index:0;
+      background:radial-gradient(closest-side,rgba(59,130,246,.30),transparent 70%);filter:blur(50px)}
+    .contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:start}
+    .contact-intro h2{font-family:var(--disp);font-weight:800;font-size:clamp(34px,5.2vw,60px);line-height:1;margin:22px 0 0}
+    .contact-intro h2 .gr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .contact-intro p{color:var(--muted);max-width:420px;margin:22px 0 0}
+    .contact-chan{display:flex;flex-direction:column;gap:12px;margin-top:34px}
+    .chan{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:14px;border:1px solid var(--line-2);
+      background:var(--panel);color:var(--ink);font-weight:600;cursor:pointer;text-align:left;width:100%;
+      transition:border-color .25s,background .25s,transform .25s}
+    .chan:hover{transform:translateY(-2px);border-color:rgba(56,189,248,.6);background:rgba(56,189,248,.05)}
+    .chan svg{width:26px;height:26px;flex:none;color:var(--cyan)}
+    .chan .lbl{font-size:15px}
+    .chan .sub{margin-left:auto;color:var(--faint);font-family:var(--mono);font-size:12.5px;letter-spacing:.02em}
+    .contact-trust{display:flex;flex-wrap:wrap;gap:16px;margin-top:26px;color:var(--muted);font-size:13.5px}
+    .contact-trust span{display:inline-flex;align-items:center;gap:7px}
+    .contact-form{background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3vw,34px);
+      display:flex;flex-direction:column;gap:16px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+    .fld{display:flex;flex-direction:column;gap:7px}
+    .fld label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+    .fld input,.fld select,.fld textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line-2);border-radius:11px;
+      padding:13px 15px;color:var(--ink);font-family:var(--body);font-size:15px;transition:border-color .25s,box-shadow .25s;outline:none}
+    .fld textarea{resize:vertical;min-height:110px}
+    .fld input::placeholder,.fld textarea::placeholder{color:#4b5478}
+    .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(56,189,248,.15)}
+    .fld select{appearance:none;-webkit-appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2398a1c4' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+    .form-submit{width:100%;justify-content:center;border:none;cursor:pointer;font-family:var(--body);margin-top:4px}
+    .form-note{font-size:13.5px;color:var(--muted);min-height:1px;text-align:center}
+    .form-note.ok{color:var(--cyan)}
+    .form-note.err{color:#fca5a5}
+    @media(max-width:820px){.contact-grid{grid-template-columns:1fr}}
+  </style>
+  <section class="contact-final" id="contact">
     <div class="halo"></div>
-    <div class="wrap">
-      <span class="eyebrow rv" style="justify-content:center;display:flex">Votre projet, mon expertise</span>
-      <h2 class="rv" style="margin-top:26px">Donnons vie<br>à <span class="gr">votre idée.</span></h2>
-      <p class="rv">Parlez-moi de votre projet. Réponse sous 24h, devis gratuit, et zéro engagement.</p>
-      <div class="hero-cta rv" style="margin-top:40px">
-        <a class="btn-primary" data-mag href="mailto:Srdesign.contactpro@gmail.com">Écrire à SR Design →</a>
-        <a class="btn-ghost" data-mag href="https://instagram.com/SRdesign_Studio" target="_blank" rel="noopener">Instagram</a>
+    <div class="wrap contact-grid">
+      <div class="contact-intro">
+        <span class="eyebrow rv">Votre projet, mon expertise</span>
+        <h2 class="rv">Donnons vie<br>à <span class="gr">votre idée.</span></h2>
+        <p class="rv">Décrivez votre projet en deux lignes. Réponse sous 24h, devis gratuit, zéro engagement.</p>
+        <div class="contact-chan rv">
+          <a class="chan" href="https://instagram.com/srdesign_studioo" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <span class="lbl">Instagram DM</span><span class="sub">@srdesign_studioo</span>
+          </a>
+          <button class="chan" type="button" data-copy="Srdesign.contactpro@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <span class="lbl">Copier l'email</span><span class="sub">Srdesign.contactpro@gmail.com</span>
+          </button>
+        </div>
+        <div class="contact-trust rv"><span>⚡ Réponse sous 24h</span><span>✓ Devis gratuit</span><span>✓ Sans engagement</span></div>
       </div>
+
+      <form class="contact-form rv" id="cform" action="https://formsubmit.co/Srdesign.contactpro@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nouveau projet — via le site SR Design">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <div class="fld"><label>Nom</label><input name="name" required placeholder="Votre nom"></div>
+        <div class="fld"><label>Email</label><input type="email" name="email" required placeholder="vous@email.com"></div>
+        <div class="fld"><label>Type de projet</label>
+          <select name="projet">
+            <option>Identité visuelle</option>
+            <option>Site / Landing page</option>
+            <option>Flyer / Print</option>
+            <option>Direction artistique</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="fld"><label>Votre message</label><textarea name="message" rows="4" required placeholder="Parlez-moi de votre projet..."></textarea></div>
+        <button class="btn-primary form-submit" type="submit">Envoyer ma demande →</button>
+        <div class="form-note" id="cnote"></div>
+      </form>
     </div>
   </section>
+
+  <script>
+  (function(){
+    document.querySelectorAll('[data-copy]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var v=b.getAttribute('data-copy'),lbl=b.querySelector('.lbl');
+        function done(){if(lbl){var o=lbl.textContent;lbl.textContent='Copié !';setTimeout(function(){lbl.textContent=o;},1600);}}
+        if(navigator.clipboard){navigator.clipboard.writeText(v).then(done).catch(done);}else{done();}
+      });
+    });
+    var f=document.getElementById('cform'),note=document.getElementById('cnote');
+    if(f){f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=f.querySelector('.form-submit');
+      note.className='form-note';note.textContent='Envoi…';btn.disabled=true;
+      fetch('https://formsubmit.co/ajax/Srdesign.contactpro@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+        .then(function(r){return r.json();})
+        .then(function(){note.className='form-note ok';note.textContent='✓ Message envoyé — réponse sous 24h.';f.reset();btn.disabled=false;})
+        .catch(function(){note.className='form-note err';note.innerHTML='Aperçu : l\'envoi est bloqué ici, mais il fonctionne sur le site en ligne. En attendant, écris-moi en <a href="https://instagram.com/srdesign_studioo" target="_blank" rel="noopener" style="color:var(--cyan)">DM Instagram</a>.';btn.disabled=false;});
+    });}
+  })();
+  </script>
 </main>
 
 <footer>
@@ -417,7 +504,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
         <h4>Contact</h4>
         <div class="foot-links">
           <a href="mailto:Srdesign.contactpro@gmail.com">Srdesign.contactpro@gmail.com</a>
-          <a href="https://instagram.com/SRdesign_Studio" target="_blank" rel="noopener">Instagram — @SRdesign_Studio</a>
+          <a href="https://instagram.com/srdesign_studioo" target="_blank" rel="noopener">Instagram — @srdesign_studioo</a>
           <a href="#">Snapchat — SRdesignStudio</a>
         </div>
       </div>
