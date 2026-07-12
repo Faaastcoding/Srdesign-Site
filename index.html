@@ -126,6 +126,35 @@ header.scrolled{background:rgba(6,7,14,.72);backdrop-filter:blur(14px) saturate(
 
 /* hero */
 .hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 90px;position:relative}
+.hero>.wrap{position:relative;z-index:1}
+/* hero animated background (adapte de 21st.dev "Shooting Stars Grid", reecrit en CSS leger) */
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.hg-grid{position:absolute;inset:-1px;
+  background-image:linear-gradient(to right,rgba(150,170,255,.055) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(150,170,255,.055) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(circle at 42% 44%,#000 0%,#000 42%,transparent 80%);
+  mask-image:radial-gradient(circle at 42% 44%,#000 0%,#000 42%,transparent 80%)}
+.hg-glow{position:absolute;inset:0;will-change:opacity,transform;
+  background:radial-gradient(circle at 28% 32%,rgba(56,189,248,.16),transparent 34%),
+    radial-gradient(circle at 76% 70%,rgba(59,130,246,.13),transparent 32%);
+  animation:hgGlow 12s ease-in-out infinite}
+@keyframes hgGlow{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+.hg-star{position:absolute;border-radius:50%;background:#e6f0ff;
+  box-shadow:0 0 8px rgba(56,189,248,.6);opacity:.4;will-change:opacity,transform;
+  animation:hgTwinkle var(--d,3s) ease-in-out infinite}
+@keyframes hgTwinkle{0%,100%{opacity:.22;transform:scale(.8)}50%{opacity:.9;transform:scale(1.18)}}
+.hg-streak{position:absolute;left:-8vw;width:190px;height:2px;border-radius:2px;opacity:0;will-change:transform,opacity;
+  background:linear-gradient(90deg,transparent,rgba(103,232,249,.95) 60%,#fff 67%,transparent);
+  box-shadow:0 0 14px rgba(56,189,248,.55);
+  animation:hgShoot var(--dur,2.2s) ease-out var(--delay,0s) infinite}
+@keyframes hgShoot{
+  0%{opacity:0;transform:translate3d(-16vw,-13vh,0) rotate(33deg)}
+  8%{opacity:1}60%{opacity:1}
+  100%{opacity:0;transform:translate3d(94vw,66vh,0) rotate(33deg)}}
+.hg-vignette{position:absolute;inset:0;
+  background:radial-gradient(circle at 42% 42%,transparent 0%,transparent 45%,rgba(6,7,14,.55) 82%,rgba(6,7,14,.92) 100%)}
+@media(prefers-reduced-motion:reduce){.hg-glow,.hg-star,.hg-streak{animation:none}.hg-streak{opacity:0}}
 .hero h1{font-size:clamp(34px,5.4vw,70px);line-height:1.05;margin:20px 0 0}
 .hero h1 .gr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lead{max-width:560px;color:var(--muted);font-size:clamp(17px,2.2vw,20px);margin-top:28px}
@@ -278,6 +307,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
 
   <!-- HERO -->
   <section class="hero" id="studio">
+    <div class="hero-bg" aria-hidden="true"><div class="hg-grid"></div><div class="hg-glow"></div><div class="hg-vignette"></div></div>
     <div class="wrap">
       <span class="eyebrow rv">Studio de design créatif · Indépendant</span>
       <h1>
@@ -662,6 +692,30 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
     setTimeout(function(){ if(intro && intro.parentNode) intro.parentNode.removeChild(intro); }, 950);
   }
   setTimeout(end, reduce ? 500 : 4300);
+})();
+</script>
+<script>
+/* hero background: generate twinkling stars + shooting streaks (once, GPU-friendly) */
+(function(){
+  var bg=document.querySelector('.hero-bg');
+  if(!bg) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var small=innerWidth<640;
+  var frag=document.createDocumentFragment();
+  var n=small?24:46;
+  for(var i=0;i<n;i++){
+    var s=document.createElement('span'); s.className='hg-star';
+    var sz=(1+Math.random()*2.2).toFixed(1);
+    s.style.cssText='left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%;width:'+sz+'px;height:'+sz+'px;--d:'+(2.4+Math.random()*3.2).toFixed(2)+'s;animation-delay:'+(Math.random()*4).toFixed(2)+'s';
+    frag.appendChild(s);
+  }
+  var lanes=small?3:6;
+  for(var j=0;j<lanes;j++){
+    var st=document.createElement('span'); st.className='hg-streak';
+    st.style.cssText='top:'+(4+Math.random()*52).toFixed(1)+'%;--dur:'+(1.8+Math.random()*1.4).toFixed(2)+'s;--delay:'+(j*1.5+Math.random()*3).toFixed(2)+'s';
+    frag.appendChild(st);
+  }
+  bg.appendChild(frag);
 })();
 </script>
 </body>
