@@ -110,12 +110,13 @@ header.scrolled{background:rgba(6,7,14,.72);backdrop-filter:blur(14px) saturate(
 .hero .rise:nth-child(3)>span{transition-delay:.18s}
 
 /* marquee */
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;
-  background:rgba(255,255,255,.012)}
+.marquee{border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding:24px 0;overflow:hidden;
+  background:linear-gradient(180deg,rgba(37,99,235,.10),rgba(56,189,248,.035))}
 .mq-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:mq 32s linear infinite}
-.mq-track span{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,30px);color:transparent;
-  -webkit-text-stroke:1px rgba(150,170,255,.4);padding:0 34px;display:inline-flex;align-items:center;gap:34px}
-.mq-track span::after{content:"◆";-webkit-text-stroke:0;color:var(--mag);font-size:12px}
+.mq-track span{font-family:var(--disp);font-weight:800;font-size:clamp(22px,3.4vw,36px);color:var(--ink);
+  letter-spacing:.005em;text-shadow:0 0 26px rgba(56,189,248,.40),0 1px 2px rgba(0,0,0,.45);
+  padding:0 32px;display:inline-flex;align-items:center;gap:32px}
+.mq-track span::after{content:"◆";color:var(--cyan);font-size:16px;text-shadow:0 0 14px var(--cyan)}
 @keyframes mq{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.mq-track{animation:none}.scrollcue .bar{animation:none}}
 
@@ -252,7 +253,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
         <a class="btn-ghost" data-mag href="#work">Voir les réalisations</a>
       </div>
       <div class="hero-foot rv">
-        <div><div class="s"><span data-count="150">0</span>+</div><div class="l">Projets livrés</div></div>
+        <div><div class="s"><span data-count="152">0</span>+</div><div class="l">Projets livrés</div></div>
         <div><div class="s"><span data-count="4">0</span> ans</div><div class="l">D'expérience</div></div>
         <div><div class="s"><span data-count="98">0</span>%</div><div class="l">Clients satisfaits</div></div>
         <div><div class="s">48h</div><div class="l">Délai moyen</div></div>
