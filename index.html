@@ -185,6 +185,7 @@ section{padding:clamp(80px,12vw,150px) 0}
 .tier h3{font-size:26px;font-weight:700;margin:14px 0 6px}
 .tier .price{font-family:var(--disp);font-weight:800;font-size:40px;margin:14px 0 4px}
 .tier .price small{font-size:15px;font-weight:400;color:var(--faint);font-family:var(--body)}
+.price .from{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-family:var(--mono);margin-bottom:4px}
 .tier ul{list-style:none;padding:0;margin:24px 0 30px;display:grid;gap:13px;font-size:15px;color:var(--muted)}
 .tier li{display:flex;gap:12px;align-items:flex-start}
 .tier li svg{flex:none;margin-top:3px;color:var(--cyan)}
@@ -350,7 +351,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
         <div class="tier rv">
           <span class="tag">Essentiel</span>
           <h3>Le visuel</h3>
-          <div class="price">50€<small> / dès</small></div>
+          <div class="price"><span class="from">À partir de</span>50€</div>
           <ul>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>1 flyer ou affiche</li>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Fichiers imprimables HD</li>
@@ -362,7 +363,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
         <div class="tier feat rv">
           <span class="tag">Le plus choisi</span>
           <h3>Signature</h3>
-          <div class="price">690€<small> / dès</small></div>
+          <div class="price"><span class="from">À partir de</span>690€</div>
           <ul>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Identité visuelle complète</li>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Site ou landing page</li>
