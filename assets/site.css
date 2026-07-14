@@ -424,6 +424,12 @@ body.sub #hdr{background:rgba(6,7,14,.72);border-bottom:1px solid var(--line);ba
 .cp-hero{padding:clamp(50px,7vw,90px) 0 0}
 .cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:start;padding:clamp(30px,4vw,50px) 0 clamp(60px,8vw,100px)}
 @media(max-width:820px){.cp-grid{grid-template-columns:1fr}}
+/* Petits ecrans : la ligne de contact (email long) passe a la ligne au lieu de deborder */
+@media(max-width:440px){
+  .chan{flex-wrap:wrap;row-gap:4px}
+  .chan .sub{word-break:break-word}
+  .foot-links a{overflow-wrap:anywhere}
+}
 /* CTA collant mobile */
 .mcta{display:none}
 @media(max-width:880px){
