@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SR Design — logo 3D (démo Three.js)</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: #cfe0f2; background: radial-gradient(120% 90% at 50% 0%, #0e1830 0%, #070b16 55%, #04060c 100%);
+    display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 40px 18px 60px;
+  }
+  h1 { font-weight: 700; font-size: clamp(20px, 4vw, 30px); margin: 6px 0 0; letter-spacing: .5px; }
+  p.sub { margin: 0; color: #7f93b3; font-size: 14px; text-align: center; }
+
+  /* --- conteneur du logo 3D --- */
+  .stage {
+    position: relative; width: min(680px, 92vw); height: min(360px, 52vw); min-height: 240px;
+  }
+  /* halo néon simulé (glow léger via CSS, pas de post-processing coûteux) */
+  .stage::before {
+    content: ""; position: absolute; inset: 8% 14%; z-index: 0; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(58,155,255,.35), rgba(58,155,255,.08) 60%, transparent 72%);
+    filter: blur(14px);
+  }
+  [data-sr-logo3d] { position: relative; z-index: 1; width: 100%; height: 100%; }
+  [data-sr-logo3d] canvas { position: relative; z-index: 1; }
+  /* image de repli : visible tant que la 3D n'est pas prête, puis masquée */
+  [data-sr-fallback] {
+    position: absolute; inset: 0; margin: auto; max-width: 78%; max-height: 78%;
+    width: auto; height: auto; object-fit: contain; z-index: 2;
+    filter: drop-shadow(0 0 26px rgba(58,155,255,.35)); transition: opacity .6s ease;
+  }
+  [data-sr-logo3d-ready="1"] [data-sr-fallback] { opacity: 0; pointer-events: none; }
+
+  .hud {
+    display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+    font-size: 13px; color: #8fa6c8;
+  }
+  .hud b { color: #cfe0f2; font-variant-numeric: tabular-nums; }
+  .note { max-width: 640px; font-size: 13px; line-height: 1.6; color: #7f93b3; text-align: center; }
+  code { background: #101a30; padding: 1px 6px; border-radius: 5px; color: #9cc4ff; font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>Logo SR Design — version 3D</h1>
+  <p class="sub">Monogramme chromé extrudé + anneau néon · Three.js vanilla · chargement différé</p>
+
+  <div class="stage">
+    <div data-sr-logo3d>
+      <img src="assets/logo.png" alt="SR Design" width="440" height="204" data-sr-fallback>
+    </div>
+  </div>
+
+  <div class="hud">
+    <span>FPS : <b id="fps">—</b></span>
+    <span>Rendu : <b id="mode">chargement…</b></span>
+    <span>Survolez avec la souris pour la parallaxe</span>
+  </div>
+
+  <p class="note">
+    Intégration : une <code>&lt;div data-sr-logo3d&gt;</code> (avec une image de repli à l'intérieur)
+    et <code>&lt;script type="module" src="assets/logo3d.js"&gt;&lt;/script&gt;</code>.
+    Three.js est importé dynamiquement, uniquement à l'approche du viewport et si l'appareil est capable.
+  </p>
+
+  <script type="module" src="assets/logo3d.js"></script>
+  <script>
+    // Compteur FPS (démo uniquement — pas nécessaire en production)
+    let last = performance.now(), frames = 0;
+    const fpsEl = document.getElementById('fps'), modeEl = document.getElementById('mode');
+    (function loop(now) {
+      frames++;
+      if (now - last >= 500) {
+        fpsEl.textContent = Math.round((frames * 1000) / (now - last));
+        frames = 0; last = now;
+      }
+      requestAnimationFrame(loop);
+    })(performance.now());
+    const stage = document.querySelector('[data-sr-logo3d]');
+    new MutationObserver(() => {
+      if (stage.dataset.srLogo3dReady === '1') modeEl.textContent = 'WebGL 3D';
+    }).observe(stage, { attributes: true });
+    if (!(window.WebGLRenderingContext)) modeEl.textContent = 'repli image (pas de WebGL)';
+  </script>
+</body>
+</html>
