@@ -13,6 +13,81 @@
 <meta property="og:image" content="https://srdesign.design/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://srdesign.design/og-image.jpg">
 <link rel="stylesheet" href="/assets/site.css">
+<style>
+/* ============ Page Contact — améliorations conversion ============ */
+.cp-hero{position:relative;overflow:hidden}
+.cp-hero .cp-halo{position:absolute;left:50%;top:-40px;translate:-50% 0;width:min(760px,94%);height:340px;
+  background:radial-gradient(60% 100% at 50% 0,rgba(56,189,248,.14),transparent 70%);filter:blur(20px);z-index:0;pointer-events:none}
+.cp-hero .wrap{position:relative;z-index:1}
+
+.cp-avail{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:100px;border:1px solid var(--line-2);
+  background:rgba(56,189,248,.05);font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);margin-top:26px}
+.cp-avail .dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:cpPulse 2.2s infinite}
+.cp-avail b{color:var(--ink);font-weight:700}
+@keyframes cpPulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+@media(prefers-reduced-motion:reduce){.cp-avail .dot{animation:none}}
+
+.cp-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cp-badges span{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:100px;border:1px solid var(--line);
+  background:var(--panel);color:var(--muted);font-size:13.5px}
+.cp-badges svg{width:15px;height:15px;flex:none;color:var(--cyan)}
+
+.cp-block-title{font-family:var(--disp);font-weight:800;font-size:clamp(20px,2.4vw,26px);margin:0}
+
+.cp-assure{margin-top:34px;padding:22px 24px;border:1px solid var(--line);border-radius:16px;
+  background:linear-gradient(180deg,rgba(56,189,248,.045),transparent)}
+.cp-assure h3{font-family:var(--disp);font-weight:800;font-size:16px;margin:0 0 7px;display:flex;align-items:center;gap:9px}
+.cp-assure h3 svg{width:18px;height:18px;color:var(--cyan)}
+.cp-assure p{color:var(--muted);font-size:14px;margin:0;line-height:1.65}
+
+.cp-quote{margin-top:26px;padding:22px 26px;border-left:2px solid var(--cyan);background:rgba(255,255,255,.02);border-radius:0 14px 14px 0}
+.cp-quote p{font-family:var(--disp);font-size:17px;line-height:1.5;color:var(--ink);margin:0;font-weight:600}
+.cp-quote .by{display:block;margin-top:13px;font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.05em}
+
+.form-reassure{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:2px;color:var(--faint);font-size:12px;text-align:center}
+.form-reassure svg{width:14px;height:14px;flex:none}
+
+/* Barre de stats */
+.cp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:18px;overflow:hidden;margin:0 0 clamp(56px,8vw,96px)}
+.cp-stats>div{background:var(--bg);padding:28px 18px;text-align:center}
+.cp-stats .num{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3.6vw,40px);line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cp-stats .cap{display:block;margin-top:9px;color:var(--muted);font-size:13px;line-height:1.4}
+@media(max-width:720px){.cp-stats{grid-template-columns:1fr 1fr}}
+
+/* FAQ */
+.cp-faq{padding:0 0 clamp(72px,9vw,120px)}
+.cp-faq .eyebrow{justify-content:center}
+.cp-faq h2{font-family:var(--disp);font-weight:800;font-size:clamp(30px,4.6vw,52px);text-align:center;line-height:1.05;margin:16px 0 42px;letter-spacing:-.02em}
+.cp-faq .faq-list{max-width:760px;margin:0 auto;display:grid;gap:12px}
+.cp-faq details{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;transition:border-color .2s,background .2s}
+.cp-faq details[open]{border-color:var(--line-2);background:rgba(255,255,255,.025)}
+.cp-faq summary{list-style:none;cursor:pointer;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink)}
+.cp-faq summary::-webkit-details-marker{display:none}
+.cp-faq summary .ic{flex:none;width:20px;height:20px;position:relative;transition:transform .3s}
+.cp-faq details[open] summary .ic{transform:rotate(45deg)}
+.cp-faq summary .ic::before,.cp-faq summary .ic::after{content:"";position:absolute;background:var(--cyan);border-radius:2px}
+.cp-faq summary .ic::before{left:50%;top:1px;width:2px;height:18px;translate:-50% 0}
+.cp-faq summary .ic::after{top:50%;left:1px;height:2px;width:18px;translate:0 -50%}
+.cp-faq .ans{padding:0 22px 20px;color:var(--muted);font-size:14.5px;line-height:1.7}
+.cp-faq .ans b{color:var(--ink)}
+
+/* CTA final */
+.cp-final{text-align:center;padding:clamp(64px,8vw,110px) 0;position:relative;overflow:hidden}
+.cp-final .cp-halo{position:absolute;left:50%;top:50%;translate:-50% -50%;width:min(720px,92%);height:320px;z-index:0;
+  background:radial-gradient(60% 100% at 50% 50%,rgba(59,130,246,.14),transparent 70%);filter:blur(24px);pointer-events:none}
+.cp-final .wrap{position:relative;z-index:1}
+.cp-final h2{font-family:var(--disp);font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.03;margin:0 0 18px;letter-spacing:-.02em}
+.cp-final .gr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cp-final p{color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:clamp(15px,1.8vw,18px)}
+.cp-final .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:100px;border:1px solid var(--line-2);
+  color:var(--ink);font-weight:600;transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:rgba(56,189,248,.6);background:rgba(56,189,248,.05)}
+.btn-ghost svg{width:18px;height:18px}
+</style>
 </head>
 <body class="sub"><header id="hdr"><div class="wrap nav">
 <a class="brand" href="/" aria-label="SR Design — Accueil"><img class="brand-logo" alt="SR Design" width="440" height="204" src="/assets/logo.png"></a>
@@ -22,11 +97,19 @@
 </div></header>
 <nav class="mobile-menu" id="mobileMenu" aria-hidden="true"><a href="/#studio">Studio</a><a href="/#services">Services</a><a href="/#work">Réalisations</a><a href="/#tarifs">Tarifs</a><a href="/contact/">Contact</a><a class="btn-primary mm-cta" href="/contact/">Démarrer un projet →</a></nav>
 <main class="sub-main">
-  <section class="cp-hero"><div class="wrap">
+  <section class="cp-hero"><div class="cp-halo"></div><div class="wrap">
     <span class="eyebrow">Contact</span>
     <h1 style="font-family:var(--disp);font-weight:800;font-size:clamp(40px,7vw,80px);line-height:1;margin:16px 0 0;letter-spacing:-.02em">Donnons vie<br>à <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">votre idée.</span></h1>
-    <p class="lead" style="color:var(--muted);max-width:560px;margin:22px 0 0">Décrivez votre projet en deux lignes. Réponse sous 24h, devis gratuit, zéro engagement.</p>
+    <p class="lead" style="color:var(--muted);max-width:560px;margin:22px 0 0">Décrivez votre projet en deux lignes. Réponse sous 24h, devis gratuit, zéro engagement — et vous parlez directement à la personne qui réalisera votre projet.</p>
+    <div class="cp-avail"><span class="dot"></span>Disponible — <b>j'accepte de nouveaux projets ce mois-ci</b></div>
+    <div class="cp-badges">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Réponse sous 24h</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Devis gratuit</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6z"/></svg>Sans engagement</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/></svg>Un seul interlocuteur</span>
+    </div>
   </div></section>
+
   <section style="padding:0"><div class="wrap"><div class="cp-grid">
     <div>
       <div class="contact-chan">
@@ -34,15 +117,27 @@
         <a class="chan" href="https://instagram.com/srdesign_studioo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span class="lbl">Instagram DM</span><span class="sub">@srdesign_studioo</span></a>
         <a class="chan" href="mailto:Srdesign.contactpro@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="lbl">Email</span><span class="sub">Srdesign.contactpro@gmail.com</span></a>
       </div>
-      <div style="margin-top:34px">
-        <h2 style="font-family:var(--disp);font-weight:800;font-size:clamp(20px,2.4vw,26px)">Ce qui se passe ensuite</h2>
-        <ol style="list-style:none;display:grid;gap:16px;margin:18px 0 0;padding:0;counter-reset:s">
+
+      <div style="margin-top:38px">
+        <h2 class="cp-block-title">Ce qui se passe ensuite</h2>
+        <ol style="list-style:none;display:grid;gap:16px;margin:20px 0 0;padding:0">
           <li style="display:flex;gap:14px;color:var(--muted)"><span style="font-family:var(--mono);color:var(--cyan)">01</span><span>Vous m'écrivez votre projet en quelques lignes.</span></li>
           <li style="display:flex;gap:14px;color:var(--muted)"><span style="font-family:var(--mono);color:var(--cyan)">02</span><span>Je reviens vers vous <b style="color:var(--ink)">sous 24h</b> avec un premier retour et un devis clair.</span></li>
           <li style="display:flex;gap:14px;color:var(--muted)"><span style="font-family:var(--mono);color:var(--cyan)">03</span><span>On lance le projet — vous parlez à <b style="color:var(--ink)">une seule personne</b>, de A à Z.</span></li>
         </ol>
       </div>
+
+      <div class="cp-assure">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Zéro risque pour vous</h3>
+        <p>Le premier échange et le devis sont <b style="color:var(--ink)">gratuits et sans engagement</b>. Rien n'est lancé tant que vous n'avez pas validé le tarif et le planning. Vous savez exactement où vous allez, dès le départ.</p>
+      </div>
+
+      <blockquote class="cp-quote">
+        <p>« Je traite chaque projet comme s'il était le mien. Pas de sous-traitance, pas de template recyclé : vous, moi, et une idée qu'on pousse jusqu'au bout. »</p>
+        <span class="by">— SR Design, studio créatif indépendant</span>
+      </blockquote>
     </div>
+
     <div class="float-wrap">
       <form class="contact-form" id="cform" action="https://formsubmit.co/Srdesign.contactpro@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="Nouveau projet — via la page Contact SR Design">
@@ -52,12 +147,60 @@
         <div class="fld"><label for="ce">Email</label><input id="ce" type="email" name="email" required placeholder="vous@email.com"></div>
         <div class="fld"><label for="cp">Type de projet</label>
           <select id="cp" name="projet"><option>Identité visuelle</option><option>Site web</option><option>Landing page</option><option>Flyer / Print</option><option>Direction artistique</option><option>Autre</option></select></div>
-        <div class="fld"><label for="cm">Votre message</label><textarea id="cm" name="message" rows="5" required placeholder="Parlez-moi de votre projet…"></textarea></div>
+        <div class="fld"><label for="cb">Budget estimé <span style="text-transform:none;letter-spacing:0;color:var(--faint)">(optionnel)</span></label>
+          <select id="cb" name="budget"><option value="">Je préfère en discuter</option><option>Moins de 300 €</option><option>300 – 800 €</option><option>800 – 2 000 €</option><option>2 000 € et plus</option></select></div>
+        <div class="fld"><label for="cm">Votre message</label><textarea id="cm" name="message" rows="5" required placeholder="Parlez-moi de votre projet, votre objectif, vos délais…"></textarea></div>
         <button class="btn-primary form-submit" type="submit">Envoyer ma demande →</button>
+        <div class="form-reassure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Vos informations restent strictement confidentielles.</div>
         <div class="form-note" id="cnote"></div>
       </form>
     </div>
   </div></div></section>
+
+  <section style="padding:0"><div class="wrap">
+    <div class="cp-stats">
+      <div><span class="num">24h</span><span class="cap">Temps de réponse</span></div>
+      <div><span class="num">0 €</span><span class="cap">Devis, toujours gratuit</span></div>
+      <div><span class="num">100 %</span><span class="cap">Sur-mesure, jamais de template</span></div>
+      <div><span class="num">1</span><span class="cap">Interlocuteur, de A à Z</span></div>
+    </div>
+  </div></section>
+
+  <section class="cp-faq"><div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2>Vos questions,<br>mes réponses.</h2>
+    <div class="faq-list">
+      <details open>
+        <summary>Combien coûte un projet ?<span class="ic"></span></summary>
+        <div class="ans">Chaque projet est unique, donc chaque devis l'est aussi. Après notre premier échange, vous recevez un <b>tarif clair et fixe</b> — pas de surprise en cours de route, pas de frais cachés. Le devis est gratuit et sans engagement, et vous pouvez indiquer votre budget dans le formulaire pour que je m'y adapte au mieux.</div>
+      </details>
+      <details>
+        <summary>Quels sont les délais ?<span class="ic"></span></summary>
+        <div class="ans">Ça dépend du projet : un flyer part en <b>quelques jours</b>, une identité visuelle ou un site prennent généralement <b>1 à 3 semaines</b>. Vous recevez un planning précis dès le devis, et je m'y tiens.</div>
+      </details>
+      <details>
+        <summary>Comment se déroule un projet ?<span class="ic"></span></summary>
+        <div class="ans">En quatre temps : <b>(1)</b> vous me décrivez votre besoin, <b>(2)</b> je vous envoie un devis et un planning clairs, <b>(3)</b> on crée ensemble avec des allers-retours pour ajuster, <b>(4)</b> je vous livre tous les fichiers finaux, prêts à l'emploi.</div>
+      </details>
+      <details>
+        <summary>Je ne sais pas exactement ce dont j'ai besoin…<span class="ic"></span></summary>
+        <div class="ans">Aucun problème, c'est même fréquent. Dites-moi simplement votre <b>objectif</b> — vendre plus, vous faire connaître, moderniser votre image — et je vous conseille la meilleure approche. On clarifie le besoin ensemble, sans jargon.</div>
+      </details>
+      <details>
+        <summary>Comment se passe le paiement ?<span class="ic"></span></summary>
+        <div class="ans">On en discute au moment du devis — en général un <b>acompte au lancement</b> et le solde à la livraison. Rien n'est engagé tant que le devis n'est pas validé de votre côté.</div>
+      </details>
+    </div>
+  </div></section>
+
+  <section class="cp-final"><div class="cp-halo"></div><div class="wrap">
+    <h2>Prêt à <span class="gr">démarrer</span> ?</h2>
+    <p>Un message suffit pour lancer la conversation. Réponse sous 24h, devis gratuit — et zéro engagement.</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="#cform" style="font-size:16px;padding:15px 30px">Remplir le formulaire →</a>
+      <a class="btn-ghost" href="https://wa.me/34666779893?text=Bonjour%20SR%20Design%2C%20je%20souhaite%20discuter%20d%27un%20projet." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.5-5.9c-.2-.1-1.4-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7.3 7.3 0 0 1-1.4-1.7c-.1-.3 0-.4.1-.5l.4-.4.2-.4a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.6 2.6 0 0 0-.8 1.9 4.5 4.5 0 0 0 1 2.4 10.3 10.3 0 0 0 4 3.5c1.4.6 1.9.6 2.6.5a2.3 2.3 0 0 0 1.5-1 1.9 1.9 0 0 0 .1-1.1c0-.1-.2-.2-.4-.3z"/></svg>Écrire sur WhatsApp</a>
+    </div>
+  </div></section>
 </main>
 <footer><div class="wrap"><div class="foot-grid">
 <div class="foot-brand"><img class="foot-logo" alt="SR Design" width="440" height="204" src="/assets/logo.png"><div class="tag">Votre projet,<br><em>mon expertise.</em></div></div>
