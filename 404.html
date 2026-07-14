@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page introuvable (404) · SR Design</title>
+<meta name="description" content="La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil de SR Design.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#06070e">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SR Design">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Page introuvable (404) · SR Design">
+<meta property="og:description" content="La page que vous cherchez n'existe pas ou a été déplacée.">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.nf-main{min-height:calc(100vh - 90px);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 0}
+.nf-wrap{max-width:640px;margin:0 auto;padding:0 24px}
+.nf-code{font-family:var(--disp);font-weight:800;line-height:.9;font-size:clamp(96px,26vw,220px);letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nf-main h1{font-family:var(--disp);font-size:clamp(24px,5vw,38px);margin:14px 0 10px;letter-spacing:-.02em}
+.nf-main p.lead{margin:0 auto 30px;max-width:460px}
+.nf-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.nf-links{margin-top:34px;font-size:14px;color:var(--muted)}
+.nf-links a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line-2);padding-bottom:1px;white-space:nowrap}
+.nf-links a:hover{color:var(--cyan);border-color:var(--cyan)}
+.nf-links .sep{margin:0 12px;color:var(--faint)}
+@media(max-width:440px){.nf-links .sep{margin:0 8px}}
+</style>
+</head>
+<body class="sub">
+<canvas id="aurora"></canvas>
+<div class="grain"></div>
+<div class="vignette"></div>
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="SR Design — Accueil"><img class="brand-logo" alt="SR Design" width="440" height="204" src="/assets/logo.png"></a>
+    <nav class="nav-links">
+      <a href="/#studio">Studio</a>
+      <a href="/#services">Services</a>
+      <a href="/#work">Réalisations</a>
+      <a href="/#tarifs">Tarifs</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <a class="btn-primary" href="/contact/">Démarrer un projet</a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="/#studio">Studio</a><a href="/#services">Services</a><a href="/#work">Réalisations</a><a href="/#tarifs">Tarifs</a><a href="/contact/">Contact</a>
+  <a class="btn-primary mm-cta" href="/contact/">Démarrer un projet →</a>
+</nav>
+<main class="nf-main">
+  <div class="nf-wrap">
+    <span class="eyebrow">Erreur 404</span>
+    <div class="nf-code" aria-hidden="true">404</div>
+    <h1>Cette page n'existe pas (ou plus)</h1>
+    <p class="lead">Le lien est peut-être cassé, ou la page a été déplacée. Pas de panique&nbsp;— repartons du bon pied.</p>
+    <div class="nf-actions">
+      <a class="btn-primary" href="/">Retour à l'accueil</a>
+      <a class="btn-ghost" href="/#work">Voir les réalisations</a>
+    </div>
+    <div class="nf-links">
+      Ou allez directement vers&nbsp;:
+      <a href="/#services">Services</a><span class="sep">·</span><a href="/#tarifs">Tarifs</a><span class="sep">·</span><a href="/contact/">Contact</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img class="foot-logo" alt="SR Design" width="440" height="204" src="/assets/logo.png">
+        <div class="tag">Votre projet,<br><em>mon expertise.</em></div>
+      </div>
+      <div><h3>Navigation</h3><div class="foot-links">
+        <a href="/#studio">Studio</a><a href="/#services">Services</a><a href="/#work">Réalisations</a><a href="/#tarifs">Tarifs</a><a href="/contact/">Contact</a>
+      </div></div>
+      <div><h3>Contact</h3><div class="foot-links">
+        <a href="mailto:Srdesign.contactpro@gmail.com">Srdesign.contactpro@gmail.com</a>
+        <a href="https://instagram.com/srdesign_studioo" target="_blank" rel="noopener">Instagram — @srdesign_studioo</a>
+        <a href="/contact/">Démarrer un projet</a>
+      </div></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SR Design — Créatif · Moderne · Professionnel</span><span>Conçu avec exigence.</span></div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.querySelector('.burger'),m=document.getElementById('mobileMenu');if(!b||!m)return;
+function s(o){b.classList.toggle('open',o);m.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');m.setAttribute('aria-hidden',o?'false':'true');document.documentElement.style.overflow=o?'hidden':'';}
+b.addEventListener('click',function(){s(!m.classList.contains('open'));});
+var a=m.querySelectorAll('a');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){s(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open'))s(false);});})();
+</script>
+<script>
+/* Fond animé "aurora" — identique aux autres pages */
+(function(){
+  var cv=document.getElementById('aurora');if(!cv)return;
+  var ctx=cv.getContext('2d'),W,H,dpr=Math.min(1.6,devicePixelRatio||1);
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
+  size();addEventListener('resize',size);
+  var cols=[[56,189,248],[59,130,246],[37,99,235]];
+  var blobs=[];for(var i=0;i<5;i++){blobs.push({x:Math.random(),y:Math.random(),
+    r:.3+Math.random()*.35,c:cols[i%3],px:Math.random()*6.28,py:Math.random()*6.28,sx:.00013+Math.random()*.0002,sy:.00013+Math.random()*.0002});}
+  function draw(t){ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
+    blobs.forEach(function(b){var x=(b.x+Math.sin(t*b.sx+b.px)*.18)*W,y=(b.y+Math.cos(t*b.sy+b.py)*.18)*H,r=b.r*Math.max(W,H);
+      var g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+',0.16)');
+      g.addColorStop(1,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+',0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();});
+    if(!reduce)requestAnimationFrame(draw);}
+  if(reduce)draw(0);else requestAnimationFrame(draw);
+})();
+</script>
+</body></html>
