@@ -418,7 +418,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
         <div><div class="s"><span data-count="152">0</span>+</div><div class="l">Projets livrés</div></div>
         <div><div class="s"><span data-count="4">0</span> ans</div><div class="l">D'expérience</div></div>
         <div><div class="s"><span data-count="98">0</span>%</div><div class="l">Clients satisfaits</div></div>
-        <div><div class="s">48h</div><div class="l">Délai moyen</div></div>
+        <div><div class="s">24h</div><div class="l">Délai de réponse</div></div>
       </div>
     </div>
   </section>
@@ -549,6 +549,39 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
     </div>
   </section>
 
+  <!-- FAQ -->
+  <style>
+    .hf{padding:clamp(72px,9vw,120px) 0;position:relative;z-index:2}
+    .hf-head{text-align:center;max-width:720px;margin:0 auto 44px}
+    .hf-head .eyebrow{justify-content:center}
+    .hf-head h2{font-family:var(--disp);font-weight:800;font-size:clamp(30px,4.8vw,54px);line-height:1.05;letter-spacing:-.02em;margin:16px 0 0}
+    .hf-list{max-width:820px;margin:0 auto;display:grid;gap:12px}
+    .hf details{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);overflow:hidden;transition:border-color .2s,background .2s}
+    .hf details[open]{border-color:var(--line-2);background:rgba(255,255,255,.03)}
+    .hf summary{list-style:none;cursor:pointer;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.9vw,17px);color:var(--ink)}
+    .hf summary::-webkit-details-marker{display:none}
+    .hf summary .ic{flex:none;width:20px;height:20px;position:relative;transition:transform .3s}
+    .hf details[open] summary .ic{transform:rotate(45deg)}
+    .hf summary .ic::before,.hf summary .ic::after{content:"";position:absolute;background:var(--cyan);border-radius:2px}
+    .hf summary .ic::before{left:50%;top:1px;width:2px;height:18px;translate:-50% 0}
+    .hf summary .ic::after{top:50%;left:1px;height:2px;width:18px;translate:0 -50%}
+    .hf .ans{padding:0 24px 22px;color:var(--muted);font-size:15px;line-height:1.7}
+    .hf .ans b{color:var(--ink)}
+  </style>
+  <section id="faq" class="hf"><div class="wrap">
+    <div class="hf-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Les questions<br>qu'on me pose souvent.</h2>
+    </div>
+    <div class="hf-list">
+      <details open><summary>Combien coûte un projet ?<span class="ic"></span></summary><div class="ans">Chaque projet est unique, donc chaque devis l'est aussi. Après notre premier échange, vous recevez un <b>tarif clair et fixe</b> — pas de surprise, pas de frais cachés. Le devis est gratuit et sans engagement.</div></details>
+      <details><summary>Quels sont les délais ?<span class="ic"></span></summary><div class="ans">Ça dépend du projet : un flyer part en <b>quelques jours</b>, une identité ou un site prennent généralement <b>1 à 3 semaines</b>. Vous recevez un planning précis dès le devis.</div></details>
+      <details><summary>Comment se déroule un projet ?<span class="ic"></span></summary><div class="ans">En quatre temps : <b>(1)</b> vous me décrivez votre besoin, <b>(2)</b> je vous envoie un devis et un planning clairs, <b>(3)</b> on crée ensemble avec des allers-retours, <b>(4)</b> je vous livre tous les fichiers finaux, prêts à l'emploi.</div></details>
+      <details><summary>Je ne sais pas exactement ce dont j'ai besoin…<span class="ic"></span></summary><div class="ans">Aucun problème, c'est fréquent. Dites-moi simplement votre <b>objectif</b> — vendre, vous faire connaître, moderniser votre image — et je vous conseille la meilleure approche. On clarifie le besoin ensemble.</div></details>
+      <details><summary>Comment se passe le paiement ?<span class="ic"></span></summary><div class="ans">On en discute au moment du devis — en général un <b>acompte au lancement</b> et le solde à la livraison. Rien n'est engagé tant que le devis n'est pas validé.</div></details>
+    </div>
+  </div></section>
+
   <!-- CONTACT -->
   <style>
     .contact-final{padding:clamp(80px,12vw,150px) 0;position:relative;overflow:hidden}
@@ -676,6 +709,26 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;background:rgba(255,
   </script>
 </main>
 
+<style>
+.mcta{display:none}
+@media(max-width:880px){
+  body:has(.mcta){padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;gap:10px;align-items:center;
+    padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));
+    background:linear-gradient(180deg,rgba(6,7,14,0),rgba(6,7,14,.94) 42%);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mcta-wa{flex:none;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:13px;
+    border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--cyan)}
+  .mcta-wa svg{width:24px;height:24px}
+  .mcta-main{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:13px;height:52px;
+    font-family:var(--body);font-weight:700;font-size:15px;color:#06070e;background:var(--grad);
+    box-shadow:0 8px 30px rgba(56,189,248,.32)}
+}
+</style>
+<div class="mcta" role="navigation" aria-label="Actions rapides">
+  <a class="mcta-wa" href="https://wa.me/34666779893?text=Bonjour%20SR%20Design%2C%20je%20souhaite%20discuter%20d%27un%20projet." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.5-5.9c-.2-.1-1.4-.7-1.7-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7.3 7.3 0 0 1-1.4-1.7c-.1-.3 0-.4.1-.5l.4-.4.2-.4a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.6 2.6 0 0 0-.8 1.9 4.5 4.5 0 0 0 1 2.4 10.3 10.3 0 0 0 4 3.5c1.4.6 1.9.6 2.6.5a2.3 2.3 0 0 0 1.5-1 1.9 1.9 0 0 0 .1-1.1c0-.1-.2-.2-.4-.3z"/></svg></a>
+  <a class="mcta-main" href="/contact/">Démarrer un projet →</a>
+</div>
 <footer>
   <div class="wrap">
     <div class="foot-grid">
