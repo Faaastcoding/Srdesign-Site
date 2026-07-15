@@ -21,11 +21,15 @@
 .cp-hero .wrap{position:relative;z-index:1}
 
 .cp-avail{display:inline-flex;align-items:center;gap:11px;padding:13px 22px;border-radius:100px;
-  border:1px solid rgba(52,211,153,.55);
+  border:1px solid rgba(52,211,153,.55);text-decoration:none;cursor:pointer;
   background:linear-gradient(180deg,rgba(52,211,153,.22),rgba(16,185,129,.12));
   font-family:var(--mono);font-size:13.5px;letter-spacing:.02em;color:#d1fae5;margin-top:26px;font-weight:600;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px rgba(52,211,153,.28),0 10px 34px rgba(16,185,129,.22);
-  animation:cpGlow 2.8s ease-in-out infinite}
+  animation:cpGlow 2.8s ease-in-out infinite;transition:transform .18s ease,border-color .18s ease}
+.cp-avail:hover{transform:translateY(-2px);border-color:rgba(52,211,153,.85)}
+.cp-avail:focus-visible{outline:2px solid #6ee7b7;outline-offset:3px}
+.cp-avail-arrow{color:#6ee7b7;font-weight:800;transition:transform .18s ease;margin-left:1px}
+.cp-avail:hover .cp-avail-arrow{transform:translateX(4px)}
 .cp-avail .dot{position:relative;width:11px;height:11px;border-radius:50%;background:#4ade80;flex:none;
   box-shadow:0 0 10px 2px rgba(74,222,128,.95)}
 .cp-avail .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(74,222,128,.8);
@@ -146,7 +150,7 @@
     <span class="eyebrow">Contact</span>
     <h1 style="font-family:var(--disp);font-weight:800;font-size:clamp(40px,7vw,80px);line-height:1;margin:16px 0 0;letter-spacing:-.02em">Donnons vie<br>à <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">votre idée.</span></h1>
     <p class="lead" style="color:var(--muted);max-width:560px;margin:22px 0 0">Décrivez votre projet en deux lignes. Réponse sous 24h, devis gratuit, zéro engagement — et vous parlez directement à la personne qui réalisera votre projet.</p>
-    <div class="cp-avail"><span class="dot"></span>Disponible — <b>j'accepte de nouveaux projets ce mois-ci</b></div>
+    <a class="cp-avail" href="https://wa.me/34666779893?text=Bonjour%20SR%20Design%2C%20j%27ai%20vu%20que%20vous%20preniez%20de%20nouveaux%20projets%20ce%20mois-ci." target="_blank" rel="noopener" aria-label="Disponible ce mois-ci — me contacter sur WhatsApp"><span class="dot"></span>Disponible — <b>j'accepte de nouveaux projets ce mois-ci</b><span class="cp-avail-arrow" aria-hidden="true">→</span></a>
     <div class="cp-badges">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Réponse sous 24h</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Devis gratuit</span>
