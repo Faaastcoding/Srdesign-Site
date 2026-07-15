@@ -20,13 +20,21 @@
   background:radial-gradient(60% 100% at 50% 0,rgba(56,189,248,.14),transparent 70%);filter:blur(20px);z-index:0;pointer-events:none}
 .cp-hero .wrap{position:relative;z-index:1}
 
-.cp-avail{display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:100px;border:1px solid rgba(52,211,153,.5);
-  background:rgba(52,211,153,.12);font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:#a7f3d0;margin-top:26px;
-  box-shadow:0 0 0 1px rgba(52,211,153,.12),0 8px 30px rgba(52,211,153,.16)}
-.cp-avail .dot{width:10px;height:10px;border-radius:50%;background:#34d399;animation:cpPulse 2.2s infinite;box-shadow:0 0 8px rgba(52,211,153,.9)}
-.cp-avail b{color:#ecfdf5;font-weight:700}
-@keyframes cpPulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
-@media(prefers-reduced-motion:reduce){.cp-avail .dot{animation:none}}
+.cp-avail{display:inline-flex;align-items:center;gap:11px;padding:13px 22px;border-radius:100px;
+  border:1px solid rgba(52,211,153,.55);
+  background:linear-gradient(180deg,rgba(52,211,153,.22),rgba(16,185,129,.12));
+  font-family:var(--mono);font-size:13.5px;letter-spacing:.02em;color:#d1fae5;margin-top:26px;font-weight:600;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 22px rgba(52,211,153,.28),0 10px 34px rgba(16,185,129,.22);
+  animation:cpGlow 2.8s ease-in-out infinite}
+.cp-avail .dot{position:relative;width:11px;height:11px;border-radius:50%;background:#4ade80;flex:none;
+  box-shadow:0 0 10px 2px rgba(74,222,128,.95)}
+.cp-avail .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(74,222,128,.8);
+  animation:cpPing 1.8s cubic-bezier(0,0,.2,1) infinite}
+.cp-avail b{color:#fff;font-weight:800}
+@keyframes cpPing{0%{transform:scale(.6);opacity:.9}80%,100%{transform:scale(2.4);opacity:0}}
+@keyframes cpGlow{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 18px rgba(52,211,153,.22),0 10px 34px rgba(16,185,129,.18)}
+  50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 30px rgba(52,211,153,.42),0 10px 40px rgba(16,185,129,.3)}}
+@media(prefers-reduced-motion:reduce){.cp-avail{animation:none}.cp-avail .dot::after{animation:none}}
 
 .cp-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .cp-badges span{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:100px;border:1px solid var(--line);
