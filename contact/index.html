@@ -20,10 +20,11 @@
   background:radial-gradient(60% 100% at 50% 0,rgba(56,189,248,.14),transparent 70%);filter:blur(20px);z-index:0;pointer-events:none}
 .cp-hero .wrap{position:relative;z-index:1}
 
-.cp-avail{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:100px;border:1px solid var(--line-2);
-  background:rgba(56,189,248,.05);font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);margin-top:26px}
-.cp-avail .dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:cpPulse 2.2s infinite}
-.cp-avail b{color:var(--ink);font-weight:700}
+.cp-avail{display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:100px;border:1px solid rgba(52,211,153,.5);
+  background:rgba(52,211,153,.12);font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:#a7f3d0;margin-top:26px;
+  box-shadow:0 0 0 1px rgba(52,211,153,.12),0 8px 30px rgba(52,211,153,.16)}
+.cp-avail .dot{width:10px;height:10px;border-radius:50%;background:#34d399;animation:cpPulse 2.2s infinite;box-shadow:0 0 8px rgba(52,211,153,.9)}
+.cp-avail b{color:#ecfdf5;font-weight:700}
 @keyframes cpPulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
 @media(prefers-reduced-motion:reduce){.cp-avail .dot{animation:none}}
 
